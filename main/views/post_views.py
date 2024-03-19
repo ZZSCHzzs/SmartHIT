@@ -52,21 +52,28 @@ def post_detail(request, pk):
     post.formatted_launch_time = format_time(post.launch_time)
 
     comments = post.comments.all()
-    comments_object = Pagination(request, comments, 20)
+    if comments:
+        comments_object = Pagination(request, comments, 20)
 
-    for i, comment in enumerate(comments_object.page_queryset, start=1):
-        comment.formatted_time = format_time(comment.created_at)
-        comment.index = i + (comments_object.page - 1) * comments_object.page_size
+        for i, comment in enumerate(comments_object.page_queryset, start=1):
+            comment.formatted_time = format_time(comment.created_at)
+            comment.index = i + (comments_object.page - 1) * comments_object.page_size
+        context = {'post': post,
+                   'is_authed': is_authed,
+                   'user': user_object,
+                   'comments': comments_object.page_queryset,
+                   'page_string': comments_object.html()
+                   }
+    else:
+        context = {'post': post,
+                   'is_authed': is_authed,
+                   'user': user_object,
+                   }
 
     # 增加帖子的浏览次数
     post.view_times += 1
     post.save()
-    context = {'post': post,
-               'is_authed': is_authed,
-               'user': user_object,
-               'comments': comments_object.page_queryset,
-               'page_string': comments_object.html()
-               }
+
     # 渲染模板并将帖子数据传递给模板
     return render(request, 'p.html', context)
 
