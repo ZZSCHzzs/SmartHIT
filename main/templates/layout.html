@@ -1,0 +1,75 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartHIT</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-4.6.2-dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/notice">通知中心</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categories">板块分区</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/post/list">新帖列表</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <form class="form-inline my-2 my-lg-0" style="margin-right: 20px">
+                        <input class="form-control mr-sm-2" type="search" placeholder="请输入" aria-label="Search">
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">搜索</button>
+                    </form>
+                    {% if is_authed %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ request.session.info.nickname }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: auto">
+                                <a class="dropdown-item" href="#">个人信息</a>
+                                <a class="dropdown-item" href="#">修改信息</a>
+                                <a class="dropdown-item" href="#">我的帖子</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">注销</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/regis">注册</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">登录</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="root">
+    {% block content %}{% endblock %}
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+        crossorigin="anonymous"></script>
+<script src="{% static 'bootstrap-4.6.2-dist/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

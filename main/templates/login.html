@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <style>
+
+        .login-page {
+            background-image: url("{% static 'img/hit3.jpg' %}") !important;
+            background-size: cover;
+            background-position: center; /* 图片位于元素的中心 */
+            background-repeat: no-repeat;
+            height: 100%;
+            min-height: 900px;
+
+        }
+    </style>
+    <div class="login-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card mt-5">
+                        <div class="card-body login-card">
+                            <h2 class="text-center mb-4 login-title">登录</h2>
+                            <form method="post" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    <div class="form-group">
+                                        <label>{{ field.label }}</label>
+                                        {{ field }}
+                                        <span style="color:red">{{ field.errors.0 }}</span>
+                                    </div>
+                                {% endfor %}
+{#                                <input type="hidden" name="next" value="{{ request.GET.next }}">#}
+                                <button type="submit" class="btn btn-primary btn-block">登录</button>
+                            </form>
+                            <div style="display: flex; justify-content: space-between;">
+                                <a href="/regis">未注册？请先注册</a>
+                                <a href="/forgot-password">忘记密码？</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

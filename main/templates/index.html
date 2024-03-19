@@ -1,0 +1,203 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartHIT</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-4.6.2-dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="clearfix">
+            <img src="{% static 'img/logo.png' %}" class="logo">
+            <img src="{% static 'img/title.png' %}" class="title">
+            <div class="title-text">校园智能信息发布平台</div>
+        </div>
+        <hr style="border-color: #3c7999;margin: 0">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/notice">通知中心</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categories">板块分区</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/post/list">新帖列表</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <form class="form-inline my-2 my-lg-0" style="margin-right: 20px">
+                        <input class="form-control mr-sm-2" type="search" placeholder="请输入" aria-label="Search">
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">搜索</button>
+                    </form>
+                    {% if is_authed %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ request.session.info.nickname }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: auto">
+                                <a class="dropdown-item" href="#">个人信息</a>
+                                <a class="dropdown-item" href="#">修改信息</a>
+                                <a class="dropdown-item" href="#">我的帖子</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">注销</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/regis">注册</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">登录</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="root">
+    <div class="container">
+        <div id="carouselExampleCaptions" class="carousel slide mt-5" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect>
+                        <text x="50%" y="50%" fill="#555" dy=".3em">First slide</text>
+                    </svg>
+
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>第一屏</h5>
+                        <p>通知简介</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect>
+                        <text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text>
+                    </svg>
+
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>第二屏</h5>
+                        <p>简介</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect>
+                        <text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text>
+                    </svg>
+
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>第三屏</h5>
+                        <p>简介</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions"
+                    data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions"
+                    data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="announcement">
+                    <div class="boardTitle">⊙全站公告</div>
+                    <div class="boardContent">
+                        <article style="white-space: pre-wrap; width: 100%;">
+                            {% for notice in notices %}
+                                [{{ notice.date }}] <span style="color: blue;">{{ notice.title }}</span>
+                                <a href="{{ notice.url }}" target="_blank">详情请戳</a><br>
+                            {% endfor %}
+                        </article>
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="important col-sm-6">
+                        <div class="boardTitle">▲重要通知</div>
+                        <div class="boardContent">
+                            <article style="white-space: pre-wrap; width: 100%;">
+                                {% for notice in notices %}
+                                    [{{ notice.date }}] <span style="color: blue;">{{ notice.title }}</span>
+                                    <a href="{{ notice.url }}" target="_blank">详情请戳</a><br>
+                                {% endfor %}
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="navigation">
+                    <div class="boardTitle">⩥快捷导航</div>
+                    <div class="navigationContent">
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="http://today.hit.edu.cn"
+                                                            target="_blank">今日哈工大</a></div>
+                        </div>
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="http://jwts.hit.edu.cn"
+                                                            target="_blank">本科生教务系统</a>
+                            </div>
+                        </div>
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="http://i.hit.edu.cn" target="_blank">哈工大门户</a>
+                            </div>
+                        </div>
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="http://i-hit-edu-cn.ivpn.hit.edu.cn"
+                                                            target="_blank">IVPN(校外)</a></div>
+                        </div>
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="#"
+                                                            target="_blank">####</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="{% static 'bootstrap-4.6.2-dist/js/bootstrap.js' %}"></script>
+</body>
+</html>

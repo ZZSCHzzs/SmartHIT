@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="launch-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow">
+                        <div class="card-body m-3">
+                            <h2 class="mb-4 font-weight-bold">发表主题帖</h2>
+                            <form method="post" id="launch-form" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    {{ form.category.label_tag }}
+                                    {{ form.category }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.title.label_tag }}
+                                    {{ form.title }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.text.label_tag }}
+                                    {{ form.text }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.additional_information.label_tag }}
+                                    {{ form.additional_information }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.additional_graphics.label_tag }}
+                                    {{ form.additional_graphics }}
+                                </div>
+                                <button type="submit" class="btn btn-primary">发表</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

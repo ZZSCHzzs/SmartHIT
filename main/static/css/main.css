@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    background-color: #f3f3f3;
+}
+
+.nav-item > a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 40px;
+    color: white !important;
+    transition: background-color 0.3s;
+    font-size: 20px;
+}
+
+.container {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.header {
+    background: #004299 !important;
+}
+
+.header img.logo {
+    vertical-align: middle;
+    height: 150px;
+}
+
+.header img.title {
+    vertical-align: middle;
+    height: 130px;
+}
+
+.header .title-text {
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    font-size: 40px;
+    margin-left: 20px;
+}
+
+.navbar {
+    background: #004299 !important;
+}
+
+.header .left, .header .right {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header .right {
+    float: right;
+}
+
+.nav-item > a:hover {
+    background: #004fc3;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.boardTitle{
+    margin-top: 20px;
+    font-size: 25px;
+    color: #004fc3;
+    font-weight: bold;
+}
+.boardContent{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 1.25rem;
+    margin-top: 15px;
+    border-width: 8px 1px 1px 1px;
+    border-style: solid;
+    border-color: #004fc3;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: 15rem;
+}
+
+
+.boardContent a {
+    color: blue; /* 链接颜色 */
+    text-decoration: none;
+
+}
+
+.boardContent a:hover {
+    text-decoration: underline;
+}
+
+.boardContent span {
+    font-weight: bold; /* 加粗字体 */
+}
+
+.boardNoMargin{
+    padding: 0;
+}
+
+.navigationContent {
+    display: flex;
+    flex-direction: column;
+    height: 21.25rem;
+    margin-top: 1rem;
+    padding: 0.75rem 1.2rem;
+    box-sizing: border-box;
+    background-color: #004fc3;
+}
+.navigationRow {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    height: 3rem;
+    align-items: center;
+    border: #3c7999 2px;
+}
+
+.navigationImage{
+    display: inline-block;
+}
+.navigationTitle{
+    display: inline-block;
+}
+
+.navigationTitle a{
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.regis-card{
+    padding: 50px;
+}
+
+.regis-title{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+
+.login-title{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.login-card{
+    padding: 40px;
+}
+
+.bg-theme{
+    background-color: #004fc3;
+}
+.bg-theme-light{
+    background-color: #135890;
+}
+.min-height{
+    min-height: 300px;
+}
+.fixed-height-textarea {
+    height: 100px; /* 设置文本输入框的固定高度 */
+    resize: none; /* 禁止用户调整文本输入框的大小 */
+}
