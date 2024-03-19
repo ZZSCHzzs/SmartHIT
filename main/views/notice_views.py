@@ -46,12 +46,15 @@ def n(request, nid):
 def notice_list(request):
     is_authed = True if request.session.get('info') else False
     notifications = Notification.objects.all().order_by('-launch_time')
-    page_object = Pagination(request, notifications)
-    context = {
-        'notifications': page_object.page_queryset,
-        'page_string': page_object.html(),
-        'is_authed': is_authed
-    }
+    if notifications:
+        page_object = Pagination(request, notifications)
+        context = {
+            'notifications': page_object.page_queryset,
+            'page_string': page_object.html(),
+            'is_authed': is_authed
+        }
+    else:
+        context = {'is_authed': is_authed}
     return render(request, 'notice_list.html', context)
 
 

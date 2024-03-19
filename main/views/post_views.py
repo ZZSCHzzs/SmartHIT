@@ -82,18 +82,23 @@ def post_list(request):
     is_authed = True if request.session.get('info') else False
     last_comment_time = Comment.objects.filter(post=OuterRef('pk')).order_by('-created_at').values('created_at')[:1]
     queryset = Post.objects.annotate(last_comment_time=Subquery(last_comment_time)).order_by('-last_comment_time')
-    page_object = Pagination(request, queryset)
+    if queryset:
+        page_object = Pagination(request, queryset)
 
-    for post in page_object.page_queryset:
-        post.formatted_launch_time = format_time(post.launch_time)
-        last_comment = post.comments.last()
-        if last_comment:
-            post.formatted_last_comment_time = format_time(last_comment.created_at)
-    context = {
-        'posts': page_object.page_queryset,
-        'page_string': page_object.html(),
-        'is_authed': is_authed
-    }
+        for post in page_object.page_queryset:
+            post.formatted_launch_time = format_time(post.launch_time)
+            last_comment = post.comments.last()
+            if last_comment:
+                post.formatted_last_comment_time = format_time(last_comment.created_at)
+        context = {
+            'posts': page_object.page_queryset,
+            'page_string': page_object.html(),
+            'is_authed': is_authed
+        }
+    else:
+        context = {
+            'is_authed': is_authed
+        }
     return render(request, 'post_list.html', context)
 
 
