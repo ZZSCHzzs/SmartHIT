@@ -19,7 +19,7 @@
             {% endif %}
         </div>
         <div class="card-footer text-muted">
-            发布时间：{{ notification.launch_time|localtime }}
+            发布时间：{{ notification.launch_time|date:"Y-m-d H:i" }}
         </div>
     </div>
 </div>

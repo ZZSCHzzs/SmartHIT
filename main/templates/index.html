@@ -12,64 +12,70 @@
 <body>
 <div class="header">
     <div class="container">
-        <div class="clearfix">
-            <img src="{% static 'img/logo.png' %}" class="logo">
-            <img src="{% static 'img/title.png' %}" class="title">
-            <div class="title-text">校园智能信息发布平台</div>
-        </div>
-        <hr style="border-color: #3c7999;margin: 0">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/index">首页</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/notice">通知中心</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categories">板块分区</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/post/list">新帖列表</a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav ml-auto">
-                    <form class="form-inline my-2 my-lg-0" style="margin-right: 20px">
-                        <input class="form-control mr-sm-2" type="search" placeholder="请输入" aria-label="Search">
-                        <button class="btn btn-primary my-2 my-sm-0" type="submit">搜索</button>
-                    </form>
-                    {% if is_authed %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ request.session.info.nickname }}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: auto">
-                                <a class="dropdown-item" href="#">个人信息</a>
-                                <a class="dropdown-item" href="#">修改信息</a>
-                                <a class="dropdown-item" href="#">我的帖子</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/logout">注销</a>
-                            </div>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/regis">注册</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">登录</a>
-                        </li>
-                    {% endif %}
-                </ul>
+        <div class="top">
+            <div class="clearfix">
+                <img src="{% static 'img/logo.png' %}" class="logo">
+                <img src="{% static 'img/title.png' %}" class="title">
+                <div class="title-text">校园智能信息发布平台</div>
             </div>
-        </nav>
+            <hr style="border-color: #3c7999;margin: 0">
+        </div>
     </div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/index">首页</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/notice">通知中心</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">板块分区</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/post/list">新帖列表</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ml-auto">
+                        <form class="form-inline my-2 my-lg-0" style="margin-right: 20px">
+                            <input class="form-control mr-sm-2" type="search" placeholder="请输入" aria-label="Search">
+                            <button class="btn btn-primary my-2 my-sm-0" type="submit">搜索</button>
+                        </form>
+                        {% if is_authed %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ request.session.info.nickname }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: auto">
+                                    <a class="dropdown-item" href="#">个人信息</a>
+                                    <a class="dropdown-item" href="#">修改信息</a>
+                                    <a class="dropdown-item" href="#">我的帖子</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/logout">注销</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/regis">注册</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">登录</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+
 </div>
-<div class="root">
-    <div class="container">
-        <div id="carouselExampleCaptions" class="carousel slide mt-5" data-ride="carousel">
+<div class="index_root">
+    <div class="container bg-white pt-4">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
@@ -133,21 +139,80 @@
                     <div class="boardTitle">⊙全站公告</div>
                     <div class="boardContent">
                         <article style="white-space: pre-wrap; width: 100%;">
-                            {% for notice in notices %}
-                                [{{ notice.date }}] <span style="color: blue;">{{ notice.title }}</span>
-                                <a href="{{ notice.url }}" target="_blank">详情请戳</a><br>
+                            {% for top in tops %}
+                                <a href="{{ top.url }}" target="_blank">{{ top.title }}</a><br>
                             {% endfor %}
                         </article>
                     </div>
                 </div>
-                <div class="row no-gutters">
+                <div class="row">
                     <div class="important col-sm-6">
                         <div class="boardTitle">▲重要通知</div>
                         <div class="boardContent">
                             <article style="white-space: pre-wrap; width: 100%;">
                                 {% for notice in notices %}
-                                    [{{ notice.date }}] <span style="color: blue;">{{ notice.title }}</span>
-                                    <a href="{{ notice.url }}" target="_blank">详情请戳</a><br>
+                                    [{{ notice.launch_time }}]
+                                    <a href="/n/{{ notice.url }}" target="_blank">{{ notice.title }}</a><br>
+                                {% endfor %}
+                            </article>
+                        </div>
+                    </div>
+                    <div class="hot col-sm-6">
+                        <div class="boardTitle">⩖学习答疑</div>
+                        <div class="boardContent">
+                            <article style="white-space: pre-wrap; width: 100%;">
+                                {% for post in posts3 %}
+                                    [{{ post.launch_time }}]
+                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
+                                {% endfor %}
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="important col-sm-6">
+                        <div class="boardTitle">▲近期热帖</div>
+                        <div class="boardContent">
+                            <article style="white-space: pre-wrap; width: 100%;">
+                                {% for post in posts2 %}
+                                    [{{ post.launch_time }}]
+                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
+                                {% endfor %}
+                            </article>
+                        </div>
+                    </div>
+                    <div class="hot col-sm-6">
+                        <div class="boardTitle">⩖表白墙</div>
+                        <div class="boardContent">
+                            <article style="white-space: pre-wrap; width: 100%;">
+                                {% for post in posts2 %}
+                                    [{{ post.launch_time }}]
+                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
+                                {% endfor %}
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="important col-sm-6">
+                        <div class="boardTitle">▲校园活动</div>
+                        <div class="boardContent">
+                            <article style="white-space: pre-wrap; width: 100%;">
+                                {% for post in posts2 %}
+                                    [{{ post.launch_time }}]
+                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
+                                {% endfor %}
+                            </article>
+                        </div>
+                    </div>
+                    <div class="hot col-sm-6">
+                        <div class="boardTitle">⩖体育结伴</div>
+                        <div class="boardContent">
+                            <article style="white-space: pre-wrap; width: 100%;">
+                                {% for post in posts2 %}
+                                    [{{ post.launch_time }}]
+                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
                                 {% endfor %}
                             </article>
                         </div>
@@ -172,18 +237,39 @@
                         </div>
                         <div class="navigationRow">
                             <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="http://yjsgl.hit.edu.cn/"
+                                                            target="_blank">研究生管理系统</a>
+                            </div>
+                        </div>
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
                             <div class="navigationTitle"><a href="http://i.hit.edu.cn" target="_blank">哈工大门户</a>
                             </div>
                         </div>
                         <div class="navigationRow">
                             <div class="navigationImage"><img src="#"></div>
-                            <div class="navigationTitle"><a href="http://i-hit-edu-cn.ivpn.hit.edu.cn"
-                                                            target="_blank">IVPN(校外)</a></div>
+                            <div class="navigationTitle"><a href="http://i-hit-edu-cn.ivpn.hit.edu.cn" target="_blank">IVPN(校外)</a>
+                            </div>
                         </div>
                         <div class="navigationRow">
                             <div class="navigationImage"><img src="#"></div>
-                            <div class="navigationTitle"><a href="#"
-                                                            target="_blank">####</a></div>
+                            <div class="navigationTitle"><a href="https://xg.hit.edu.cn/xs/mh"
+                                                            target="_blank">学工系统</a></div>
+                        </div>
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="http://xyk.hit.edu.cn" target="_blank">校园卡</a>
+                            </div>
+                        </div>
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="http://venue-book.hit.edu.cn:8080/" target="_blank">运动场地预约</a>
+                            </div>
+                        </div>
+                        <div class="navigationRow">
+                            <div class="navigationImage"><img src="#"></div>
+                            <div class="navigationTitle"><a href="http://ic.lib.hit.edu.cn/"
+                                                            target="_blank">图书馆预约</a></div>
                         </div>
                     </div>
                 </div>
@@ -199,5 +285,6 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script src="{% static 'bootstrap-4.6.2-dist/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

@@ -66,7 +66,7 @@ body {
 .boardTitle{
     margin-top: 20px;
     font-size: 25px;
-    color: #004fc3;
+    color: #135890;
     font-weight: bold;
 }
 .boardContent{
@@ -76,7 +76,7 @@ body {
     margin-top: 15px;
     border-width: 8px 1px 1px 1px;
     border-style: solid;
-    border-color: #004fc3;
+    border-color: #544696;
     box-sizing: border-box;
     background-color: #fff;
     min-height: 15rem;
@@ -84,7 +84,7 @@ body {
 
 
 .boardContent a {
-    color: blue; /* 链接颜色 */
+    color: blue;
     text-decoration: none;
 
 }
@@ -104,21 +104,17 @@ body {
 .navigationContent {
     display: flex;
     flex-direction: column;
-    height: 21.25rem;
-    margin-top: 1rem;
-    padding: 0.75rem 1.2rem;
+    margin-top: 15px;
+    padding: 15px 25px;
     box-sizing: border-box;
-    background-color: #004fc3;
+    background-color: #135890;
 }
 .navigationRow {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    height: 3rem;
+    min-height: 50px;
     align-items: center;
+    margin-top: 10px;
     border: #3c7999 2px;
 }
-
 .navigationImage{
     display: inline-block;
 }
@@ -130,9 +126,11 @@ body {
     font-size: 20px;
     color: white;
     font-weight: bold;
-    text-decoration: none;
+    text-decoration: Mark;
 }
-
+.root{
+    margin-top: 100px;
+}
 .regis-card{
     padding: 50px;
 }
@@ -141,8 +139,6 @@ body {
     font-weight: bold;
     font-size: 30px;
 }
-
-
 
 .login-title{
     font-weight: bold;

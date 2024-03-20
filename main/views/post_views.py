@@ -1,5 +1,5 @@
 from .utils import *
-from django.db.models import OuterRef, Subquery
+from django.db.models import OuterRef, Subquery, Case, When, F
 
 
 class PostForm(forms.ModelForm):
@@ -80,8 +80,19 @@ def post_detail(request, pk):
 
 def post_list(request):
     is_authed = True if request.session.get('info') else False
+
     last_comment_time = Comment.objects.filter(post=OuterRef('pk')).order_by('-created_at').values('created_at')[:1]
-    queryset = Post.objects.annotate(last_comment_time=Subquery(last_comment_time)).order_by('-last_comment_time')
+
+    queryset = Post.objects.annotate(
+        last_comment_time=Subquery(last_comment_time)
+    ).annotate(
+        sort_by=Case(
+            When(last_comment_time__isnull=False, then=F('last_comment_time')),
+            default=F('launch_time'),
+            output_field=models.DateTimeField()
+        )
+    ).order_by('-sort_by')
+
     if queryset:
         page_object = Pagination(request, queryset)
 
