@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main.apps.MainConfig'
+    'main.apps.MainConfig',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -88,6 +89,14 @@ DATABASES = {
             'init_command': "SET collation_connection = utf8mb4_unicode_ci"
         }
     }
+}
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'height': 300,
+        'width': '100%',
+    },
 }
 
 

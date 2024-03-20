@@ -24,7 +24,8 @@ class Department(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name="帖子分类")
-
+    description = models.TextField(verbose_name="分区描述")
+    top_pic = models.FileField(max_length=30, verbose_name="分区头图", upload_to="top_pic/", blank=True, null=True)
     def __str__(self):
         return self.name
 
@@ -58,7 +59,7 @@ class User(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.PROTECT)
-    launcher_uid = models.IntegerField(verbose_name="发布者ID")
+    launcher_uid = models.BigIntegerField(verbose_name="发布者ID")
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name="所属分类")
     launch_time = models.DateTimeField(auto_now_add=True, verbose_name="发布时间")
     title = models.CharField(max_length=100, verbose_name="标题")

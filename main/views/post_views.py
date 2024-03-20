@@ -113,6 +113,11 @@ def post_list(request):
     return render(request, 'post_list.html', context)
 
 
+def category(request):
+    is_authed = True if request.session.get('info') else False
+    return render(request, 'category.html', is_authed)
+
+
 def add_comment(request, pk):
     if not request.session.get('info'):
         redirect('/login')
