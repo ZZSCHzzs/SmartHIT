@@ -1,0 +1,29 @@
+<!-- templates/user/edit_info.html -->
+{% extends 'user/user_center.html' %}
+
+{% block user_content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card border-0">
+                <div class="card-header border-0">
+                    <h5 class="card-title">修改个人信息</h5>
+                </div>
+                <div class="card-body col-sm-6">
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label class="regis-label">{{ field.label }}</label>
+                                {{ field }}
+                                <span style="color:red">{{ field.errors.0 }}</span>
+
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">提交修改</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

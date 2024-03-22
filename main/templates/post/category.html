@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <h3 class="h3">版面列表</h3>
+        {% for category_type in category_types %}
+            <div class="row mt-3 mb-5">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header bg-theme-light text-white">
+                            <h4 class="m-1">{{ category_type.name }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {% for category in category_type.categories %}
+                                    <div class="col-md-4 mb-0">
+                                        <div class="card border-0">
+
+                                            <div class="card-body col">
+                                                <a href="/c/{{ category.cid }}">
+                                                    <img src="{% static 'img/category_icons/'|add:category.cid %}"
+                                                         alt=""
+                                                         class="card-img">
+                                                </a>
+                                                <h4 class="card-title text-center"
+                                                    style="font-size: 1.7rem; font-weight: bold;">
+                                                    <a href="/c/{{ category.cid }}"
+                                                       class="text-dark">{{ category.name }}</a>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,7 +1,7 @@
 from .utils import *
 
 
-class NoticeForm(forms.ModelForm):
+class NoticeForm(BaseImageForm):
     class Meta:
         model = Notification
         fields = ('launcher', 'type', 'title', 'text', 'additional_graphics')
@@ -32,7 +32,7 @@ def launch(request):
     if user_object and user_object.permission_group and user_object.permission_group.id < 4:
         return redirect('/notice')
     form = NoticeForm()
-    return render(request, 'launch.html', {'form': form, 'is_authed': is_authed})
+    return render(request, 'notice/launch.html', {'form': form, 'is_authed': is_authed})
 
 
 def n(request, nid):
@@ -40,7 +40,7 @@ def n(request, nid):
     notification = get_object_or_404(Notification, pk=nid)
     notification.view_times += 1
     notification.save()
-    return render(request, 'n.html', {'notification': notification, 'is_authed': is_authed})
+    return render(request, 'notice/n.html', {'notification': notification, 'is_authed': is_authed})
 
 
 def notice_list(request):
@@ -55,7 +55,7 @@ def notice_list(request):
         }
     else:
         context = {'is_authed': is_authed}
-    return render(request, 'notice_list.html', context)
+    return render(request, 'notice/notice_list.html', context)
 
 
 def notice(request):
@@ -65,6 +65,12 @@ def notice(request):
         info_data = request.session.get('info')
         user_object = User.objects.filter(uid=info_data['id']).first()
         is_allowed = True if user_object and user_object.permission_group and user_object.permission_group.id >= 4 else False
+    types = Type.objects.filter(id__gte=3)
+    for i in types:
+        i.notifications = Notification.objects.filter(type=i).order_by('-launch_time')[:5]
     latest_notifications = Notification.objects.order_by('-launch_time')[:5]
-    return render(request, 'notice.html', {'latest_notifications': latest_notifications,
-                                           'is_authed': is_authed, 'is_allowed': is_allowed})
+    context = {'latest_notifications': latest_notifications,
+               'types': types,
+               'is_authed': is_authed,
+               'is_allowed': is_allowed}
+    return render(request, 'notice/notice.html', context)

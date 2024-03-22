@@ -4,7 +4,7 @@ body {
     background-color: #f3f3f3;
 }
 
-.nav-item > a{
+.nav-item > a {
     text-decoration: none;
     display: inline-block;
     padding: 15px 40px;
@@ -63,15 +63,29 @@ body {
     clear: both;
 }
 
-.boardTitle{
+.carousel-item img {
+    object-fit: cover;
+}
+
+.carousel-caption {
+    backdrop-filter: blur(5px); /* 添加虚化效果 */
+    background-color: rgba(255, 255, 255, 0.2); /* 背景颜色并设置透明度 */
+    padding: 10px; /* 可选：添加一些内边距使虚化效果更明显 */
+}
+
+.carousel-caption h5,
+.carousel-caption p {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* 设置阴影效果 */
+}
+
+.boardTitle {
     margin-top: 20px;
     font-size: 25px;
     color: #135890;
     font-weight: bold;
 }
-.boardContent{
-    display: flex;
-    flex-direction: row;
+
+.boardContent {
     padding: 1rem 1.25rem;
     margin-top: 15px;
     border-width: 8px 1px 1px 1px;
@@ -97,7 +111,7 @@ body {
     font-weight: bold; /* 加粗字体 */
 }
 
-.boardNoMargin{
+.boardNoMargin {
     padding: 0;
 }
 
@@ -109,56 +123,73 @@ body {
     box-sizing: border-box;
     background-color: #135890;
 }
+
 .navigationRow {
     min-height: 50px;
     align-items: center;
     margin-top: 10px;
     border: #3c7999 2px;
 }
-.navigationImage{
-    display: inline-block;
-}
-.navigationTitle{
+
+.navigationImage {
     display: inline-block;
 }
 
-.navigationTitle a{
+.navigationTitle {
+    display: inline-block;
+}
+
+.navigationTitle a {
     font-size: 20px;
     color: white;
     font-weight: bold;
     text-decoration: Mark;
 }
-.root{
+
+.root {
     margin-top: 100px;
 }
-.regis-card{
+
+.regis-card {
     padding: 50px;
 }
 
-.regis-title{
+.regis-title {
     font-weight: bold;
     font-size: 30px;
 }
 
-.login-title{
+.login-title {
     font-weight: bold;
     font-size: 30px;
 }
 
-.login-card{
+.login-card {
     padding: 40px;
 }
 
-.bg-theme{
+.bg-theme {
     background-color: #004fc3;
 }
-.bg-theme-light{
+
+.bg-theme-light {
     background-color: #135890;
 }
-.min-height{
+
+.min-height {
     min-height: 300px;
 }
+
 .fixed-height-textarea {
     height: 100px; /* 设置文本输入框的固定高度 */
     resize: none; /* 禁止用户调整文本输入框的大小 */
+}
+
+.todayHIT div {
+    font-size: 15pt !important;
+
+}
+
+.todayHIT ul {
+    padding: 0 !important;
 }

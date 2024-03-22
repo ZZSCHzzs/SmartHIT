@@ -1,6 +1,4 @@
 {% load static %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,113 +19,99 @@
             <hr style="border-color: #3c7999;margin: 0">
         </div>
     </div>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/index">首页</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/notice">通知中心</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">板块分区</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/post/list">新帖列表</a>
-                        </li>
-                    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/notice">通知中心</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/category">板块分区</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/post/list">新帖列表</a>
+                    </li>
+                </ul>
 
-                    <ul class="navbar-nav ml-auto">
-                        <form class="form-inline my-2 my-lg-0" style="margin-right: 20px">
-                            <input class="form-control mr-sm-2" type="search" placeholder="请输入" aria-label="Search">
-                            <button class="btn btn-primary my-2 my-sm-0" type="submit">搜索</button>
-                        </form>
-                        {% if is_authed %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ request.session.info.nickname }}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: auto">
-                                    <a class="dropdown-item" href="#">个人信息</a>
-                                    <a class="dropdown-item" href="#">修改信息</a>
-                                    <a class="dropdown-item" href="#">我的帖子</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/logout">注销</a>
-                                </div>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/regis">注册</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login">登录</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
+                <ul class="navbar-nav ml-auto">
+                    <form class="form-inline my-2 my-lg-0" style="margin-right: 20px">
+                        <input class="form-control mr-sm-2" type="search" placeholder="请输入" aria-label="Search">
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">搜索</button>
+                    </form>
+                    {% if is_authed %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ request.session.info.nickname }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: auto">
+                                <a class="dropdown-item" href="/account/info">个人信息</a>
+                                <a class="dropdown-item" href="/account/edit">修改信息</a>
+                                <a class="dropdown-item" href="/account/posts">我的帖子</a>
+                                <a class="dropdown-item" href="/account/comments">我的评论</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">注销</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/regis">注册</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">登录</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
+        </div>
 
-        </nav>
+    </nav>
 
 </div>
 <div class="index_root">
     <div class="container bg-white pt-4">
-        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <div id="carouselCaptions" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
+                <li data-target="#carouselCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselCaptions" data-slide-to="1" class=""></li>
+                <li data-target="#carouselCaptions" data-slide-to="2" class=""></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
-                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
-                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777"></rect>
-                        <text x="50%" y="50%" fill="#555" dy=".3em">First slide</text>
-                    </svg>
-
+                    <img class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                        src="{% static 'img/hit1.jpg' %}" alt>
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>第一屏</h5>
-                        <p>通知简介</p>
+                        <h5>欢迎来到校园智能信息发布平台</h5>
+                        <p>平台实现通知信息+校园论坛的整合</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
-                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
-                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#666"></rect>
-                        <text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text>
-                    </svg>
-
+                    <img class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                        src="{% static 'img/hit2.jpg' %}" alt>
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>第二屏</h5>
-                        <p>简介</p>
+                        <h5>Welcome to SmartHIT!</h5>
+                        <p>The platform provides newest notification and forum service</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
-                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
-                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#555"></rect>
-                        <text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text>
-                    </svg>
-
+                    <img class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                        src="{% static 'img/hit3.jpeg' %}" alt>
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>第三屏</h5>
-                        <p>简介</p>
+                        <h5>公告</h5>
+                        <p>如果您想参与网站的建设与管理，请与我们联系</p>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions"
+            <button class="carousel-control-prev" type="button" data-target="#carouselCaptions"
                     data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions"
+            <button class="carousel-control-next" type="button" data-target="#carouselCaptions"
                     data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
@@ -136,93 +120,140 @@
         <div class="row">
             <div class="col-sm-8">
                 <div class="announcement">
-                    <div class="boardTitle">⊙全站公告</div>
+                    <div class="boardTitle">📰全站公告</div>
                     <div class="boardContent">
-                        <article style="white-space: pre-wrap; width: 100%;">
-                            {% for top in tops %}
-                                <a href="{{ top.url }}" target="_blank">{{ top.title }}</a><br>
+                        {% for top in tops %}
+                            <div class="py-1 border-bottom d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a class="card-title mb-0 text-decoration-none"
+                                       href="/n/{{ top.pk }}">{{ top.title }}</a>
+                                </div>
+                                <div class="text-muted">
+                                    <small>[{{ top.launch_time|date:"Y.m.d" }}]</small>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p class="card-text">暂无</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="important col-sm-6">
+                        <div class="boardTitle">⚠️重要通知</div>
+                        <div class="boardContent">
+                            {% for notification in notifications %}
+                                <div class="py-1 border-bottom d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a class="card-title mb-0 text-decoration-none"
+                                           href="/n/{{ notification.pk }}">{{ notification.title }}</a>
+                                    </div>
+                                    <div class="text-muted">
+                                        <small>[{{ notification.launch_time|date:"Y.m.d" }}]</small>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p class="card-text">暂无</p>
                             {% endfor %}
-                        </article>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="important col-sm-6">
-                        <div class="boardTitle">▲重要通知</div>
-                        <div class="boardContent">
-                            <article style="white-space: pre-wrap; width: 100%;">
-                                {% for notice in notices %}
-                                    [{{ notice.launch_time }}]
-                                    <a href="/n/{{ notice.url }}" target="_blank">{{ notice.title }}</a><br>
-                                {% endfor %}
-                            </article>
-                        </div>
-                    </div>
-                    <div class="hot col-sm-6">
-                        <div class="boardTitle">⩖学习答疑</div>
-                        <div class="boardContent">
-                            <article style="white-space: pre-wrap; width: 100%;">
-                                {% for post in posts3 %}
-                                    [{{ post.launch_time }}]
-                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
-                                {% endfor %}
-                            </article>
                         </div>
                     </div>
 
-                </div>
-                <div class="row">
-                    <div class="important col-sm-6">
-                        <div class="boardTitle">▲近期热帖</div>
+                    <div class="hot col-sm-6">
+                        <div class="boardTitle">🔥近期热帖</div>
                         <div class="boardContent">
-                            <article style="white-space: pre-wrap; width: 100%;">
-                                {% for post in posts2 %}
-                                    [{{ post.launch_time }}]
-                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
-                                {% endfor %}
-                            </article>
+                            {% for post in posts1 %}
+                                <div class="py-1 border-bottom d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a class="card-title mb-0 text-decoration-none"
+                                           href="/p/{{ post.pk }}">{{ post.title }}</a>
+                                    </div>
+                                    <div class="text-muted">
+                                        <small>[{{ post.launch_time|date:"Y.m.d" }}]</small>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p class="card-text">暂无</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="study col-sm-6">
+                        <div class="boardTitle">📖学习答疑</div>
+                        <div class="boardContent">
+                            {% for post in posts2 %}
+                                <div class="py-1 border-bottom d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a class="card-title mb-0 text-decoration-none"
+                                           href="/p/{{ post.pk }}">{{ post.title }}</a>
+                                    </div>
+                                    <div class="text-muted">
+                                        <small>[{{ post.launch_time|date:"Y.m.d" }}]</small>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p class="card-text">暂无</p>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="hot col-sm-6">
-                        <div class="boardTitle">⩖表白墙</div>
+                        <div class="boardTitle">❤️情感与生活</div>
                         <div class="boardContent">
-                            <article style="white-space: pre-wrap; width: 100%;">
-                                {% for post in posts2 %}
-                                    [{{ post.launch_time }}]
-                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
-                                {% endfor %}
-                            </article>
+                            {% for post in posts3 %}
+                                <div class="py-1 border-bottom d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a class="card-title mb-0 text-decoration-none"
+                                           href="/p/{{ post.pk }}">{{ post.title }}</a>
+                                    </div>
+                                    <div class="text-muted">
+                                        <small>[{{ post.launch_time|date:"Y.m.d" }}]</small>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p class="card-text">暂无</p>
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                    <div class="sport col-sm-6">
+                        <div class="boardTitle">🏸体育结伴</div>
+                        <div class="boardContent">
+                            {% for post in posts4 %}
+                                <div class="py-1 border-bottom d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a class="card-title mb-0 text-decoration-none"
+                                           href="/p/{{ post.pk }}">{{ post.title }}</a>
+                                    </div>
+                                    <div class="text-muted">
+                                        <small>[{{ post.launch_time|date:"Y.m.d" }}]</small>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p class="card-text">暂无</p>
+                            {% endfor %}
+                        </div>
+                    </div>
                     <div class="important col-sm-6">
-                        <div class="boardTitle">▲校园活动</div>
+                        <div class="boardTitle">🏫校园活动</div>
                         <div class="boardContent">
-                            <article style="white-space: pre-wrap; width: 100%;">
-                                {% for post in posts2 %}
-                                    [{{ post.launch_time }}]
-                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
-                                {% endfor %}
-                            </article>
+                            {% for post in posts5 %}
+                                <div class="py-1 border-bottom d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a class="card-title mb-0 text-decoration-none"
+                                           href="/p/{{ post.pk }}">{{ post.title }}</a>
+                                    </div>
+                                    <div class="text-muted">
+                                        <small>[{{ post.launch_time|date:"Y.m.d" }}]</small>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p class="card-text">暂无</p>
+                            {% endfor %}
                         </div>
                     </div>
-                    <div class="hot col-sm-6">
-                        <div class="boardTitle">⩖体育结伴</div>
-                        <div class="boardContent">
-                            <article style="white-space: pre-wrap; width: 100%;">
-                                {% for post in posts2 %}
-                                    [{{ post.launch_time }}]
-                                    <a href="/p/{{ post.pk }}" target="_blank">{{ post.title }}</a><br>
-                                {% endfor %}
-                            </article>
-                        </div>
-                    </div>
-                </div>
 
+
+                </div>
             </div>
             <div class="col-sm-4">
                 <div class="navigation">
-                    <div class="boardTitle">⩥快捷导航</div>
+                    <div class="boardTitle">✈️快捷导航</div>
                     <div class="navigationContent">
                         <div class="navigationRow">
                             <div class="navigationImage"><img src="#"></div>
@@ -273,6 +304,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="count">
+                    <div class="boardTitle">🌐网站统计</div>
+                    <div class="navigationContent p-3">
+                        <a class="text-white text-decoration-none">
+                            通知总数：{{ notification_count }}
+                        </a>
+                        <a class="text-white text-decoration-none">
+                            主题帖总数：{{ post_count }}
+                        </a>
+                        <a class="text-white text-decoration-none">
+                            今日新帖：{{ new_post_count }}
+                        </a>
+                        <a class="text-white text-decoration-none">
+                            今日新通知：{{ new_notice_count }}
+                        </a>
+                        <a class="text-white text-decoration-none">
+                            用户总数：{{ user_count }}
+                        </a>
+
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -285,6 +337,26 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script src="{% static 'bootstrap-4.6.2-dist/js/bootstrap.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        var navbar = $(".navbar");
+        var headerOffset = navbar.offset().top;
+        var headerHeight = navbar.outerHeight();
+
+        $(window).scroll(function () {
+            var scrollPosition = $(this).scrollTop();
+
+            // 检查页面滚动位置是否超过导航栏原始位置
+            if (scrollPosition >= headerOffset) {
+                navbar.addClass("fixed-top");
+                $(".index_root").css("padding-top", 80); // 为body添加与导航栏高度相同的padding-top，避免内容跳动
+            } else {
+                navbar.removeClass("fixed-top");
+                $(".index_root").css("padding-top", 0); // 如果导航栏不固定，移除body的padding-top
+            }
+        });
+    });
+</script>
 <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

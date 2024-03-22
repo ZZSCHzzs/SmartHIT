@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from main import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -37,9 +39,17 @@ urlpatterns = [
     path('post/list', views.post_list),
     path('p/<int:pk>', views.post_detail),
     path('add_comment/<int:pk>', views.add_comment),
-    path('delete_comment/<int:pk>',views.delete_comment),
+    path('delete_comment/<int:pk>', views.delete_comment),
     path('delete_post/<int:pk>', views.delete_post),
     path('category', views.category),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('c/<int:cid>', views.category_detail),
+
+    path('account/', views.view_info),
+    path('account/info', views.view_info),
+    path('account/edit', views.edit_info),
+    path('account/posts', views.my_posts),
+    path('account/comments', views.my_comments),
+    path('account/subscription', views.subscription),
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

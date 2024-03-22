@@ -1,0 +1,51 @@
+<!-- templates/user/my_posts.html -->
+{% extends 'user/user_center.html' %}
+
+{% block user_content %}
+<div class="card border-0">
+                    <div class="card-header border-0">
+                    <h5 class="card-title">我的帖子</h5>
+                </div>
+    <div class="card-body p-0 ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">评论内容</th>
+                                <th scope="col">发布时间</th>
+                                <th scope="col">所属主题帖</th>
+                                <th scope="col">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 在这里使用模板循环语法展示我的帖子列表 -->
+                            {% for comment in comments %}
+                            <tr>
+                                <td >
+                                    {{ comment.content|slice:":20" }}{% if comment.content|length > 20 %}...{% endif %}
+                                </td>
+                                <td>{{ comment.created_at|date:"Y-m-d H:i" }}</td>
+
+                                <td>
+                                    <a href="/p/{{ comment.post.id }}">{{ comment.post.title|slice:":20" }}</a>
+                                </td>
+                                <td>
+{#                                    <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-primary">编辑</a>#}
+                                    <a href="/delete_comment/{{ comment.id }}" class="btn btn-sm btn-danger">删除</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3">暂无评论</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

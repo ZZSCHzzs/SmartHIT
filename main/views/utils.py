@@ -6,6 +6,24 @@ from django.http import JsonResponse
 from main.models import *
 from django.utils.safestring import mark_safe
 from datetime import datetime, timedelta
+import os
+import uuid
+
+
+class BaseImageForm(forms.ModelForm):
+    additional_graphics = forms.ImageField(label="附加图片", required=False)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if 'additional_graphics' in self.cleaned_data:
+            image = self.cleaned_data['additional_graphics']
+            if image:  # 检查是否有上传图片
+                # 生成随机文件名
+                filename = str(uuid.uuid4()) + os.path.splitext(image.name)[-1]
+                instance.additional_graphics.save(filename, image, save=False)
+        if commit:
+            instance.save()
+        return instance
 
 
 class Pagination(object):

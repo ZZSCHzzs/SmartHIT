@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class State(models.Model):
     name = models.CharField(max_length=50, verbose_name="状态名称")
 
@@ -24,8 +23,18 @@ class Department(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name="帖子分类")
-    description = models.TextField(verbose_name="分区描述")
+    description = models.TextField(verbose_name="分区描述", blank=True, null=True)
     top_pic = models.FileField(max_length=30, verbose_name="分区头图", upload_to="top_pic/", blank=True, null=True)
+    cid = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.name
+
+
+class CategoryType(models.Model):
+    name = models.CharField(max_length=50, verbose_name="大类")
+    tid = models.IntegerField(default=0)
+
     def __str__(self):
         return self.name
 

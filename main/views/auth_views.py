@@ -81,7 +81,7 @@ def regis(request):
     else:
         form = RegisForm()
 
-    return render(request, 'regis.html', {'form': form})
+    return render(request, 'auth/regis.html', {'form': form})
 
 
 def login(request):
@@ -95,7 +95,7 @@ def login(request):
             user_object = User.objects.filter(username=username, password=password).first()
             if not user_object:
                 form.add_error('password', "用户名或密码错误")
-                return render(request, "login.html", {'form': form})
+                return render(request, "auth/login.html", {'form': form})
             request.session['info'] = {'id': user_object.uid, 'nickname': user_object.nickname,
                                        'username': user_object.username}
             # next_url = request.POST['next']
@@ -104,7 +104,7 @@ def login(request):
             return redirect('/index')
 
     form = LoginForm()
-    return render(request, "login.html", {'form': form})
+    return render(request, "auth/login.html", {'form': form})
 
 
 def logout(request):

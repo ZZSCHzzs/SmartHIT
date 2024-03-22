@@ -1,42 +1,48 @@
 from .utils import *
 from django.db.models import OuterRef, Subquery, Case, When, F
+from django import forms
+from django.core.validators import FileExtensionValidator
 
 
-class PostForm(forms.ModelForm):
+class PostForm(BaseImageForm):
     class Meta:
         model = Post
         fields = ["category", "title", "text", "additional_information", "additional_graphics"]
         widgets = {
-            'text': forms.Textarea(attrs={'class': 'fixed-height-textarea'})
+            'text': forms.Textarea(attrs={'class': 'fixed-height-textarea'}),
         }
 
     def __init__(self, *args, **kwargs):
+        cid = kwargs.pop('cid', None)
         super().__init__(*args, **kwargs)
         for name, field in self.fields.items():
             if name == "additional_graphics":
                 continue
             current_classes = field.widget.attrs.get('class', '')
             field.widget.attrs['class'] = current_classes + ' form-control'
+        if cid is not None:
+            self.fields['category'].initial = Category.objects.get(cid=cid)
 
 
 def create_post(request):
     is_authed = True if request.session.get('info') else False
     if not is_authed:
-        redirect('login')
+        return redirect('login')
+
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            # 获取当前登录用户的uid
             launcher_uid = request.session.get('info').get('id')
-            # 创建Post对象，并设置相关字段的值
             post = form.save(commit=False)
             post.launcher_uid = launcher_uid
             post.author = User.objects.get(uid=launcher_uid)
             post.save()
             return redirect(f'/p/{post.pk}')
     else:
-        form = PostForm()
-    return render(request, 'post.html', {'form': form, 'is_authed': is_authed})
+        cid = request.GET.get('cid')
+        form = PostForm(cid=cid)
+
+    return render(request, 'post/post.html', {'form': form, 'is_authed': is_authed})
 
 
 def post_detail(request, pk):
@@ -75,15 +81,23 @@ def post_detail(request, pk):
     post.save()
 
     # 渲染模板并将帖子数据传递给模板
-    return render(request, 'p.html', context)
+    return render(request, 'post/p.html', context)
 
 
-def post_list(request):
+def get_posts(cid, request):
     is_authed = True if request.session.get('info') else False
+    context = {
+        'is_authed': is_authed
+    }
 
     last_comment_time = Comment.objects.filter(post=OuterRef('pk')).order_by('-created_at').values('created_at')[:1]
 
-    queryset = Post.objects.annotate(
+    queryset = Post.objects.all()
+
+    if cid != 0:
+        queryset = queryset.filter(category__cid=cid)
+
+    queryset = queryset.annotate(
         last_comment_time=Subquery(last_comment_time)
     ).annotate(
         sort_by=Case(
@@ -101,21 +115,35 @@ def post_list(request):
             last_comment = post.comments.last()
             if last_comment:
                 post.formatted_last_comment_time = format_time(last_comment.created_at)
-        context = {
+        context.update({
             'posts': page_object.page_queryset,
-            'page_string': page_object.html(),
-            'is_authed': is_authed
-        }
-    else:
-        context = {
-            'is_authed': is_authed
-        }
-    return render(request, 'post_list.html', context)
+            'page_string': page_object.html()
+        })
+    return context
+
+
+def post_list(request):
+    context = get_posts(0, request)
+    return render(request, 'post/post_list.html', context)
 
 
 def category(request):
     is_authed = True if request.session.get('info') else False
-    return render(request, 'category.html', is_authed)
+    category_types = CategoryType.objects.all()
+    for category_type in category_types:
+        category_type.categories = Category.objects.filter(cid__gte=category_type.tid * 10, cid__lte=(category_type.tid + 1) * 10)
+    context = {
+        'is_authed': is_authed,
+        "category_types": category_types
+    }
+    return render(request, 'post/category.html', context)
+
+
+def category_detail(request, cid):
+    context = get_posts(cid, request)
+    category_object = Category.objects.get(cid=cid)
+    context.update({'category_object': category_object})
+    return render(request, 'post/c.html', context)
 
 
 def add_comment(request, pk):
