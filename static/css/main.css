@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+    font-family: "Microsoft JhengHei UI", sans-serif;
+    background-color: #f3f3f3;
+}
+
+.nav-item > a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 40px;
+    color: white !important;
+    transition: background-color 0.3s;
+    font-size: 20px;
+}
+
+.container {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.header {
+    background: #004299 !important;
+}
+
+.header img.logo {
+    vertical-align: middle;
+    height: 150px;
+}
+
+.header img.title {
+    vertical-align: middle;
+    height: 130px;
+}
+
+.header .title-text {
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    font-size: 40px;
+    margin-left: 20px;
+}
+
+.navbar {
+    background: #004299 !important;
+}
+
+.header .left, .header .right {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header .right {
+    float: right;
+}
+
+.nav-item > a:hover {
+    background: #004fc3;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.carousel-item img {
+    object-fit: cover;
+}
+
+.carousel-caption {
+    backdrop-filter: blur(5px); /* 添加虚化效果 */
+    background-color: rgba(255, 255, 255, 0.2); /* 背景颜色并设置透明度 */
+    padding: 10px; /* 可选：添加一些内边距使虚化效果更明显 */
+}
+
+.carousel-caption h5,
+.carousel-caption p {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* 设置阴影效果 */
+}
+
+.boardTitle {
+    margin-top: 20px;
+    font-size: 25px;
+    color: #135890;
+    font-weight: bold;
+}
+
+.boardContent {
+    padding: 1rem 1.25rem;
+    margin-top: 15px;
+    border-width: 8px 1px 1px 1px;
+    border-style: solid;
+    border-color: #544696;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: 15rem;
+}
+
+
+.boardContent a {
+    color: blue;
+    text-decoration: none;
+
+}
+
+.boardContent a:hover {
+    text-decoration: underline;
+}
+
+.boardContent span {
+    font-weight: bold; /* 加粗字体 */
+}
+
+.boardNoMargin {
+    padding: 0;
+}
+
+.navigationContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    background-color: #135890;
+}
+
+.navigationRow {
+    min-height: 50px;
+    align-items: center;
+    margin-top: 10px;
+    border: #3c7999 2px;
+}
+
+.navigationImage {
+    display: inline-block;
+}
+
+.navigationTitle {
+    display: inline-block;
+}
+
+.navigationTitle a {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    text-decoration: Mark;
+}
+
+.root {
+    margin-top: 100px;
+}
+
+.regis-card {
+    padding: 50px;
+}
+
+.regis-title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.login-title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.login-card {
+    padding: 40px;
+}
+
+.bg-theme {
+    background-color: #004fc3;
+}
+
+.bg-theme-light {
+    background-color: #135890;
+}
+
+.min-height {
+    min-height: 300px;
+}
+
+.fixed-height-textarea {
+    height: 100px; /* 设置文本输入框的固定高度 */
+    resize: none; /* 禁止用户调整文本输入框的大小 */
+}
+
+.todayHIT div {
+    font-size: 15pt !important;
+
+}
+
+.todayHIT ul {
+    padding: 0 !important;
+}
