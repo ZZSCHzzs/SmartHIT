@@ -3,7 +3,7 @@ import dashscope
 import os
 
 
-dashscope.api_key = "sk-edc4fb494e6446cf9bb77bb181e77b07"
+dashscope.api_key = ""
 
 
 def generate_summary_and_keywords(notification_content):
