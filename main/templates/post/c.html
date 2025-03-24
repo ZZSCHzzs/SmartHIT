@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="card mt-5">
+            <div class="card-header bg-theme-light text-white text-center">
+                <h3 class="m-0">{{ category_object.name }}</h3>
+            </div>
+            <div class="card-body">
+
+                {% if category_object.description %}
+                    <p class="card-text">{{ category_object.description }}</p>
+                {% else %}
+                    <p class="card-text">暂无描述</p>
+                {% endif %}
+                {% if category_object.top_pic %}
+                    <img src="{{ category_object.top_pic }}" class="img-fluid" alt="图片">
+                {% endif %}
+            </div>
+        </div>
+        <div class="row no-gutters mt-3">
+            <div class="d-flex justify-content-between align-items-center mb-4 col-sm-12">
+                <h2 class="mb-0">帖子列表</h2>
+                {% if is_authed %}
+                    <a href="/post/?cid={{ category_object.cid }}" class="btn bg-theme-light text-white">发表主题帖</a>
+                {% endif %}
+            </div>
+        </div>
+        {% for post in posts %}
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card shadow">
+                        <div style="display: flex">
+                            <div class="card-header text-center"
+                                 style="display: flex; align-items: center; justify-content: center;">
+                                {{ post.category }}
+                            </div>
+
+                            <div class="card-body pl-3 pr-3 pb-4 pt-4">
+                                <h5 class="card-title mb-0"><a href="/p/{{ post.id }}">{{ post.title }}</a></h5>
+                                <div class="d-flex justify-content-between align-items-center" style="height: 100%;">
+                                    <div>
+                                        <p class="card-text mb-0 text-muted">{{ post.author.nickname }}</p>
+                                        {% if post.comments.last %}
+                                            <div class="align-items-center"
+                                                 style="height: 100%;">
+                                                <div>
+                                                    <p class="card-text mb-0 text-muted">
+                                                        最后回复：{{ post.comments.last.author.nickname }}
+                                                        {{ post.formatted_last_comment_time }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <p class="card-text mb-0 text-muted">
+                                            {{ post.formatted_launch_time }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- 分页组件 -->
+        <ul class="pagination justify-content-center">
+            {{ page_string }}
+        </ul>
+    </div>
+{% endblock %}

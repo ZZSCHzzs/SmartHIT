@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="mb-4">通知列表</h2>
+        {% for notification in notifications %}
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card shadow">
+                        <div style="display: flex">
+                            <div class="card-header text-center"
+                                 style="display: flex; align-items: center; justify-content: center;">
+                                {{ notification.type }}
+                            </div>
+
+                            <div class="card-body pl-3 pr-3 pb-4 pt-4">
+                                <h5 class="card-title mb-0"><a
+                                        href="/n/{{ notification.id }}">{{ notification.title }}</a></h5>
+                                <div class="d-flex justify-content-between align-items-center" style="height: 100%;">
+                                    <div>
+                                        <p class="card-text mb-0 text-muted">发布者: {{ notification.launcher }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="card-text mb-0 text-muted">
+                                            发布时间: {{ notification.launch_time|date:"Y-m-d H:i" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- 分页组件 -->
+        <ul class="pagination justify-content-center">
+            {{ page_string }}
+        </ul>
+    </div>
+{% endblock %}

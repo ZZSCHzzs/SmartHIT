@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="launch-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-8 shadow bg-white">
+                    <div class="card-body login-card ">
+                        <h2 class="mb-4 font-weight-bold">发布新通知</h2>
+                        <form method="post" id="launch-form" enctype="multipart/form-data" novalidate>
+                            {% csrf_token %}
+                            <div style="display: flex; justify-content: space-between;">
+                                <div class="form-group col-sm-6">{{ form.launcher.label }}{{ form.launcher }}</div>
+                                <div class="form-group col-sm-6">{{ form.type.label }}{{ form.type }}</div>
+                            </div>
+
+                            <div class="form-group col-sm-12">{{ form.title.label }}{{ form.title }}</div>
+                            <div class="form-group col-sm-12">{{ form.text.label }}{{ form.text }}</div>
+                            <div class="form-group col-sm-12">{{ form.additional_graphics.label }}
+                                <br>{{ form.additional_graphics }}
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary">发布</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HTML模态框 -->
+    <div class="modal" id="launch-success-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">发布成功</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>发布成功!是否继续发布通知</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" href="/notice/launch">继续
+                    </button>
+                    <button type="button" class="btn btn-secondary" ><a class="text-decoration-none text-white" href="/notice">回到通知中心</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#launch-form').submit(function (event) {
+                event.preventDefault(); // 阻止表单默认提交行为
+
+                // 使用 FormData 获取表单数据
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: $(this).attr('action'), // 提交到的URL，从表单的action属性获取
+                    type: $(this).attr('method'), // 提交方式，从表单的method属性获取
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.success) {
+                            // 表单提交成功，显示模态框
+                            $('#launch-form')[0].reset();
+                            $('#launch-success-modal').modal('show');
+                        } else {
+
+                        }
+                    },
+                    error: function (xhr, status, error) {
+
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

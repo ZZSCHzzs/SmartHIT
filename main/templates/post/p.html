@@ -1,0 +1,141 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card shadow mt-0">
+                    <div class="card-body">
+                        <h2 class="mb-3 font-weight-bold">{{ post.title }}</h2>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-0 text-muted">{{ post.author.nickname }}</p>
+                            <p class="mb-0 text-muted">{{ post.formatted_launch_time }}</p>
+                        </div>
+                        <hr>
+                        <div class="post-content">{{ post.text | safe }}</div>
+                        {% if post.additional_information %}
+                            <hr>
+                            <p class="font-weight-bold">附加信息:</p>
+                            <p>{{ post.additional_information }}</p>
+                        {% endif %}
+                        {% if post.additional_graphics %}
+                            <hr>
+                            <p class="font-weight-bold">附加图片:</p>
+                            <img src="{{ post.additional_graphics.url }}" class="img-fluid rounded" alt="附加图片">
+                        {% endif %}
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-0 text-muted">点赞:{{ post.likes }}</p>
+                            <div>
+                                {% if is_authed %}
+                                {% if  user == post.author %}
+                                <a class="text-danger delete-post col-4 text-decoration-none" href="" data-post-id="{{ post.id }}">删除主题帖</a>
+                                {% endif %}
+                            {% endif %}
+                            <a class="mb-0 text-muted">浏览次数:{{ post.view_times }}</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+
+        <div class="card mt-4 shadow mb-3">
+            <div class="card-body">
+                <h4 class="mb-3">写评论</h4>
+                <form method="post" action="/add_comment/{{ post.pk }}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="comment" style="display: none"></label>
+                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">提交评论</button>
+                </form>
+            </div>
+        </div>
+        <h3 class="mb-3">评论</h3>
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="card mb-2 shadow">
+                    <div class="card-body">
+                        <p class="mb-2 mt-2">
+                            <span class="font-weight-bold">#{{ comment.index }}</span>
+                            <span>{{ comment.content }}</span>
+                        </p>
+                        <hr>
+                        <div class="d-flex justify-content-between mt-1">
+                            <div>
+                                <p class="mb-0 text-muted">{{ comment.author.nickname }}</p>
+                            </div>
+                            <div>
+
+                                {% if is_authed %}
+                                    {% if user == comment.author or user == comment.post.author %}
+                                        <a class="text-danger delete-comment text-decoration-none" href=""
+                                           data-comment-id="{{ comment.pk }}">删除评论</a>
+                                    {% endif %}
+                                {% endif %}
+                                <a class="mb-0 text-muted ml-3">{{ comment.formatted_time }}</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+                <ul class="pagination mt-4">
+                    {{ page_string }}
+                </ul>
+        {% else %}
+            <div class="card mb-2 shadow">
+                <div class="card-body">
+                    <p>目前还没有评论。</p>
+                </div>
+            </div>
+        {% endif %}
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $(".delete-comment").click(function () {
+                var commentId = $(this).data('comment-id');
+                $.ajax({
+                    type: 'POST',
+                    url: '/delete_comment/' + commentId,
+                    data: {
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    },
+                    success: function () {
+                        $("#comment-" + commentId).remove();
+                        location.reload();
+                    }
+                });
+            });
+        });
+        $(document).ready(function () {
+            $(".delete-post").click(function () {
+                var postId = $(this).data('post-id');
+                $.ajax({
+                    type: 'POST',
+                    url: '/delete_post/' + postId,
+                    data: {
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    },
+                    success: function () {
+
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
